@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "npx vite",
+    "build": "npx vite build",
+    "preview": "npx vite preview"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
@@ -20,6 +20,9 @@
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
-    "vite": "^7.3.1"
+    "vite": "^5.0.8"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
