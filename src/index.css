@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background-color: #FDFBF5;
+    color: #1C1F33;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl shadow-sm p-5;
+    border: 1px solid #FDEFC7;
+  }
+  .btn-primary {
+    @apply text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-sm active:scale-95;
+    background-color: #F4A924;
+  }
+  .btn-primary:hover { background-color: #D4891A; }
+
+  .btn-secondary {
+    @apply font-medium px-5 py-2.5 rounded-xl transition-all duration-200;
+    background-color: #FDFBF5;
+    border: 1px solid #FDEFC7;
+    color: #1C1F33;
+  }
+  .btn-secondary:hover { background-color: #FFF8E7; }
+
+  .btn-teacher {
+    @apply text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-sm active:scale-95;
+    background-color: #2A7A5B;
+  }
+  .btn-teacher:hover { background-color: #1F5C44; }
+
+  .btn-student {
+    @apply text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-sm active:scale-95;
+    background-color: #2B65A8;
+  }
+  .btn-student:hover { background-color: #1E4D85; }
+
+  .btn-danger {
+    @apply text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200;
+    background-color: #E85D75;
+  }
+  .btn-danger:hover { background-color: #D14560; }
+
+  .input {
+    @apply w-full rounded-xl px-4 py-3 placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all;
+    background-color: #FDFBF5;
+    border: 1px solid #FDEFC7;
+    color: #1C1F33;
+    --tw-ring-color: #F4C55A;
+  }
+  .textarea {
+    @apply w-full rounded-xl px-4 py-3 placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all resize-none;
+    background-color: #FDFBF5;
+    border: 1px solid #FDEFC7;
+    color: #1C1F33;
+    --tw-ring-color: #F4C55A;
+  }
+  .badge {
+    @apply inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full text-white animate-bounce-in;
+    background-color: #E85D75;
+  }
+  .status-pending {
+    @apply text-xs font-medium px-2.5 py-1 rounded-full;
+    color: #A86A10;
+    background-color: #FFF8E7;
+    border: 1px solid #FDEFC7;
+  }
+  .status-submitted {
+    @apply text-xs font-medium px-2.5 py-1 rounded-full;
+    color: #1E4D85;
+    background-color: #EBF3FB;
+    border: 1px solid #C7DFF5;
+  }
+  .status-corrected {
+    @apply text-xs font-medium px-2.5 py-1 rounded-full;
+    color: #1F5C44;
+    background-color: #EBF5F0;
+    border: 1px solid #C8E6D8;
+  }
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-200;
+    color: rgba(28,31,51,0.7);
+  }
+  .sidebar-item:hover {
+    color: #1C1F33;
+    background-color: #FFF8E7;
+  }
+  .sidebar-item.active {
+    @apply font-medium;
+    background-color: #FDEFC7;
+    color: #A86A10;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #F4C55A; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #F4A924; }
+
+/* Audio player */
+audio { width: 100%; border-radius: 8px; }
+
+/* PDF viewer */
+.pdf-container iframe { border-radius: 12px; }
+
+/* Recording pulse */
+@keyframes recordPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 93, 117, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(232, 93, 117, 0); }
+}
+.recording-active { animation: recordPulse 1.2s ease-in-out infinite; }
+
+/* Toast */
+.toast { animation: slideUp 0.3s ease-out; }
