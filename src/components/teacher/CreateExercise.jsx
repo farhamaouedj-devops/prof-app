@@ -5,7 +5,7 @@ import FileUpload from '../shared/FileUpload'
 import { ArrowLeft, Send, UserCheck } from 'lucide-react'
 
 export default function CreateExercise({ students, teacherId, onBack }) {
-  const [form, setForm] = useState({ title: '', description: '', deadline: '' })
+  const [form, setForm] = useState({ title: '', description: '', deadline: '', subject: '' })
   const [attachment, setAttachment] = useState(null)
   const [selectedStudents, setSelectedStudents] = useState([])
   const [loading, setLoading] = useState(false)
@@ -106,7 +106,23 @@ export default function CreateExercise({ students, teacherId, onBack }) {
             <span className="text-lg">📝</span> Contenu de l'exercice
           </h3>
           <div>
-            <label className="block text-sm font-medium text-navy/70 mb-1.5">Titre *</label>
+            <div>
+            <label className="block text-sm font-medium mb-1.5" style={{color:'rgba(28,31,51,0.7)'}}>Matière</label>
+            <div className="flex flex-wrap gap-2">
+              {['Mathématiques','Français','Anglais','Histoire-Géo','Sciences','Physique-Chimie','Philosophie','Autre'].map(s => (
+                <button key={s} type="button" onClick={() => set('subject', form.subject === s ? '' : s)}
+                  className="px-3 py-1.5 rounded-xl text-sm font-medium transition-all"
+                  style={{
+                    backgroundColor: form.subject === s ? '#1C1F33' : '#FDFBF5',
+                    color: form.subject === s ? 'white' : 'rgba(28,31,51,0.6)',
+                    border: form.subject === s ? '1px solid #1C1F33' : '1px solid #FDEFC7'
+                  }}>
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
+          <label className="block text-sm font-medium text-navy/70 mb-1.5">Titre *</label>
             <input className="input" type="text" placeholder="Ex: Exercice de conjugaison — Passé composé" value={form.title} onChange={e => set('title', e.target.value)} required />
           </div>
           <div>

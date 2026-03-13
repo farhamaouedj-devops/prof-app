@@ -157,7 +157,10 @@ function AssignmentCard({ assignment, onClick }) {
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="font-semibold text-navy group-hover:text-amber-700 transition-colors">{ex?.title}</h3>
+            <div className="flex items-center gap-2 flex-wrap min-w-0">
+              <h3 className="font-semibold text-navy group-hover:text-amber-700 transition-colors">{ex?.title}</h3>
+              {ex?.subject && <span style={{ fontSize:11, fontWeight:600, padding:"2px 8px", borderRadius:999, backgroundColor:"#1C1F33", color:"white", whiteSpace:"nowrap" }}>{ex.subject}</span>}
+            </div>
             <span className={`flex-shrink-0 text-xs ${sc.class} px-2 py-0.5 rounded-full`}>{sc.label}</span>
           </div>
           {ex?.description && (

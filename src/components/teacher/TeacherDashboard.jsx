@@ -186,7 +186,10 @@ export default function TeacherDashboard() {
                         <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ backgroundColor: '#FFF8E7' }}>📋</div>
                         <span style={{ fontSize: 12, color: 'rgba(28,31,51,0.4)' }}>{formatDate(ex.created_at)}</span>
                       </div>
-                      <h3 className="font-semibold mb-1 line-clamp-2" style={{ color: '#1C1F33' }}>{ex.title}</h3>
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <h3 className="font-semibold line-clamp-1" style={{ color: '#1C1F33' }}>{ex.title}</h3>
+                        {ex.subject && <span style={{ fontSize:11, fontWeight:600, padding:'2px 8px', borderRadius:999, backgroundColor:'#1C1F33', color:'white' }}>{ex.subject}</span>}
+                      </div>
                       {ex.description && <p className="text-sm line-clamp-2 mb-3" style={{ color: 'rgba(28,31,51,0.5)' }}>{ex.description}</p>}
                       <div className="flex items-center justify-between pt-3" style={{ borderTop: '1px solid #FFF8E7' }}>
                         <button onClick={e => { e.stopPropagation(); deleteExercise(ex.id) }}
