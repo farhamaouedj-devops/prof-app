@@ -44,8 +44,8 @@ export default function AuthPage() {
           setLoading(false)
           return toast('Le code de la prof est requis', 'error')
         }
-        const { data: teacher } = await supabase.from('profiles')
-          .select('id').eq('teacher_code', form.teacherCode.trim().toUpperCase()).single()
+        const { data: teacherRows } = await supabase.rpc('get_teacher_by_code', { code: form.teacherCode.trim() })
+        const teacher = teacherRows?.[0]
         if (!teacher) {
           setLoading(false)
           return toast('Code prof invalide. Vérifie avec ta professeure.', 'error')
