@@ -167,7 +167,7 @@ export default function App() {
           !user ? <Navigate to="/auth" replace />
           : profileError ? <ErrorScreen message={profileError} onSignOut={signOut} />
           : !profile ? <LoadingScreen />
-          : !profile.is_validated && profile.role !== 'admin' ? <PendingValidation onSignOut={signOut} />
+          : false // validation désactivée pour les élèves ? <PendingValidation onSignOut={signOut} />
           : profile.role === 'admin' ? <AdminDashboard />
           : profile.role === 'teacher' ? <TeacherDashboard />
           : <StudentDashboard />
