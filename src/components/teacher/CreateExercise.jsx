@@ -34,7 +34,9 @@ export default function CreateExercise({ students, teacherId, onBack }) {
       // Upload attachment
       if (attachment) {
         const compressed = await compressImage(attachment)
-        const path = storagePath.exerciseAttachment(teacherId, exercise.id, sanitizeFilename(compressed.name || attachment.name))
+        const ext = attachment.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g, '') || 'bin'
+        const safeName = Date.now() + '.' + ext
+        const path = storagePath.exerciseAttachment(teacherId, exercise.id, safeName)
         const url = await uploadFile(supabase, 'media', path, compressed)
         await supabase.from('exercises').update({
           attachment_url: url,

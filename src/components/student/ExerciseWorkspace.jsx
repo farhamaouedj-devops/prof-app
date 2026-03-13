@@ -71,7 +71,9 @@ export default function ExerciseWorkspace({ assignment, onBack }) {
     setUploadingSchema(true)
     try {
       const compressed = await compressImage(file, 1)
-      const path = storagePath.submissionSchema(profile.id, assignment.id, sanitizeFilename(compressed.name || file.name))
+      const ext = file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg'
+      const safeName = Date.now() + '.' + ext
+      const path = storagePath.submissionSchema(profile.id, assignment.id, safeName)
       const url = await uploadFile(supabase, 'media', path, compressed)
       setSchemaUrl(url)
       await supabase.from('submissions').update({ schema_url: url }).eq('id', submissionIdRef.current)
