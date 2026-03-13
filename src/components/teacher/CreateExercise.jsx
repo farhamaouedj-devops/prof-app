@@ -107,20 +107,26 @@ export default function CreateExercise({ students, teacherId, onBack }) {
             <span className="text-lg">📝</span> Contenu de l'exercice
           </h3>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{color:'rgba(28,31,51,0.7)'}}>Matière</label>
-            <div className="flex flex-wrap gap-2">
+            <label style={{display:'block', fontSize:14, fontWeight:500, color:'rgba(28,31,51,0.7)', marginBottom:8}}>Matière</label>
+            <div style={{display:'flex', flexWrap:'wrap', gap:8}}>
               {['Mathématiques','Français','Anglais','Histoire-Géo','Sciences','Physique-Chimie','Philosophie','Autre'].map(s => (
                 <button key={s} type="button" onClick={() => set('subject', form.subject === s ? '' : s)}
-                  className="px-3 py-1.5 rounded-xl text-sm font-medium transition-all"
                   style={{
-                    backgroundColor: form.subject === s ? '#1C1F33' : '#FDFBF5',
-                    color: form.subject === s ? 'white' : 'rgba(28,31,51,0.6)',
-                    border: form.subject === s ? '1px solid #1C1F33' : '1px solid #FDEFC7'
+                    padding:'6px 14px',
+                    borderRadius:12,
+                    fontSize:13,
+                    fontWeight:600,
+                    cursor:'pointer',
+                    transition:'all 0.15s',
+                    backgroundColor: form.subject === s ? '#F4A924' : 'white',
+                    color: form.subject === s ? 'white' : '#1C1F33',
+                    border: form.subject === s ? '2px solid #F4A924' : '2px solid #FDEFC7'
                   }}>
                   {s}
                 </button>
               ))}
             </div>
+            {form.subject && <p style={{fontSize:12, color:'#2A7A5B', marginTop:6, fontWeight:500}}>✓ Matière sélectionnée : {form.subject}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium mb-1.5" style={{color:'rgba(28,31,51,0.7)'}}>Titre *</label>
