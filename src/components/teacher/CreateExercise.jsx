@@ -27,7 +27,8 @@ export default function CreateExercise({ students, teacherId, onBack }) {
         teacher_id: teacherId,
         title: form.title.trim(),
         description: form.description.trim() || null,
-        deadline: form.deadline || null
+        deadline: form.deadline || null,
+        subject: form.subject || null
       }).select().single()
       if (exErr) throw exErr
 
