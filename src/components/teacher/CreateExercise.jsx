@@ -106,8 +106,7 @@ export default function CreateExercise({ students, teacherId, onBack }) {
             <span className="text-lg">📝</span> Contenu de l'exercice
           </h3>
           <div>
-            <div>
-            <label className="block text-sm font-medium mb-1.5" style={{color:'rgba(28,31,51,0.7)'}}>Matière</label>
+            <label className="block text-sm font-medium mb-2" style={{color:'rgba(28,31,51,0.7)'}}>Matière</label>
             <div className="flex flex-wrap gap-2">
               {['Mathématiques','Français','Anglais','Histoire-Géo','Sciences','Physique-Chimie','Philosophie','Autre'].map(s => (
                 <button key={s} type="button" onClick={() => set('subject', form.subject === s ? '' : s)}
@@ -122,7 +121,8 @@ export default function CreateExercise({ students, teacherId, onBack }) {
               ))}
             </div>
           </div>
-          <label className="block text-sm font-medium text-navy/70 mb-1.5">Titre *</label>
+          <div>
+            <label className="block text-sm font-medium mb-1.5" style={{color:'rgba(28,31,51,0.7)'}}>Titre *</label>
             <input className="input" type="text" placeholder="Ex: Exercice de conjugaison — Passé composé" value={form.title} onChange={e => set('title', e.target.value)} required />
           </div>
           <div>
