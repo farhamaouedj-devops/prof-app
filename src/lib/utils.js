@@ -104,14 +104,28 @@ export function isPDFFile(url) {
   return /\.pdf$/i.test(url) || url.includes('.pdf')
 }
 
+// ── Sanitize filename (remove accents, spaces, special chars) ─────────────
+export function sanitizeFilename(name) {
+  return name
+    .normalize("NFD").replace(/[̀-ͯ]/g, "") // remove accents
+    .replace(/[^a-zA-Z0-9._-]/g, "_")                  // replace special chars
+    .replace(/_+/g, "_")                                // collapse underscores
+    .toLowerCase()
+}
+
 // ── Upload file to Supabase Storage ───────────────────────────────────────
 export async function uploadFile(supabase, bucket, path, file) {
-  const { data, error } = await supabase.storage.from(bucket).upload(path, file, {
+  // Sanitize the filename part of the path
+  const parts = path.split("/")
+  parts[parts.length - 1] = sanitizeFilename(parts[parts.length - 1])
+  const cleanPath = parts.join("/")
+  
+  const { data, error } = await supabase.storage.from(bucket).upload(cleanPath, file, {
     upsert: true,
     contentType: file.type
   })
   if (error) throw error
-  const { data: { publicUrl } } = supabase.storage.from(bucket).getPublicUrl(path)
+  const { data: { publicUrl } } = supabase.storage.from(bucket).getPublicUrl(cleanPath)
   return publicUrl
 }
 
