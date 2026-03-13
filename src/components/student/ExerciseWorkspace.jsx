@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../App'
-import { uploadFile, storagePath, compressImage, timeAgo, toast } from '../../lib/utils'
+import { uploadFile, storagePath, compressImage, sanitizeFilename, timeAgo, toast } from '../../lib/utils'
 import { FileViewer } from '../shared/FileUpload'
 import VoiceRecorder, { VoiceMessageList } from '../shared/VoiceRecorder'
 import { ArrowLeft, Save, Send, Mic, Image, CheckCircle, Clock } from 'lucide-react'
@@ -71,7 +71,7 @@ export default function ExerciseWorkspace({ assignment, onBack }) {
     setUploadingSchema(true)
     try {
       const compressed = await compressImage(file, 1)
-      const path = storagePath.submissionSchema(profile.id, assignment.id, compressed.name || file.name)
+      const path = storagePath.submissionSchema(profile.id, assignment.id, sanitizeFilename(compressed.name || file.name))
       const url = await uploadFile(supabase, 'media', path, compressed)
       setSchemaUrl(url)
       await supabase.from('submissions').update({ schema_url: url }).eq('id', submissionIdRef.current)

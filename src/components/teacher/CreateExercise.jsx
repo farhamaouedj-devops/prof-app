@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { supabase } from '../../lib/supabase'
-import { compressImage, uploadFile, storagePath, toast } from '../../lib/utils'
+import { compressImage, uploadFile, storagePath, sanitizeFilename, toast } from '../../lib/utils'
 import FileUpload from '../shared/FileUpload'
 import { ArrowLeft, Send, UserCheck } from 'lucide-react'
 
@@ -34,7 +34,7 @@ export default function CreateExercise({ students, teacherId, onBack }) {
       // Upload attachment
       if (attachment) {
         const compressed = await compressImage(attachment)
-        const path = storagePath.exerciseAttachment(teacherId, exercise.id, compressed.name || attachment.name)
+        const path = storagePath.exerciseAttachment(teacherId, exercise.id, sanitizeFilename(compressed.name || attachment.name))
         const url = await uploadFile(supabase, 'media', path, compressed)
         await supabase.from('exercises').update({
           attachment_url: url,
